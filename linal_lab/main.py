@@ -112,6 +112,10 @@ class Dataset:
         else:
             raise ValueError
 
+        for i in range(v.shape[0]):
+            v[i] = cp.linalg.normalize(v[i])
+        v = v.T
+
         return PCA(new_dataset.matrix @ v)
 
     def add_noise_and_compare(self, noise_level: float = 0.1) -> tuple[PCA, PCA]:
